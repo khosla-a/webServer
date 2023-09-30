@@ -26,7 +26,8 @@ def webServer(port=13331):
     outputdata = f.read()
     print (outputdata)
    
-    connectionSocket.send('\nHTTP/1.1 200 OK\n\n'.encode())
+    ok = b"\nHTTP/1.1 200 OK\n\n"
+    connectionSocket.send(ok)
     connectionSocket.send(outputdata.encode())
 
     #Note that a complete header must end with a blank line, creating the four-byte sequence "\r\n\r\n"
