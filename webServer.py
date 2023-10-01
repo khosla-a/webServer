@@ -33,20 +33,21 @@ def webServer(port=13331):
       body = f.read()
       
       #Content-Type is an example on how to send a header as bytes. There are more!
-      ok = b"HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\nConnection: close\r\n\r\n"
+      ok = "HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\nConnection: close\r\n\r\n"
       #Status code, Content type, Content length
       
+      ok += body
+      print(ok)
          
-      connectionSocket.send(ok)
-      connectionSocket.send(body.encode()) 
+      connectionSocket.send(ok.encode())
       connectionSocket.close() #closing the connection socket
       
     except Exception as e:
       # Send response message for invalid request due to the file not being found (404)
       # Remember the format you used in the try: block!
       #Fill in start
-      outputdata = b"HTTP/1.1 404 Not Found\r\nContent-Type: text/html; charset=UTF-8\nConnection: close\r\n\r\n"
-      connectionSocket.send(outputdata)
+      notfound = b"HTTP/1.1 404 Not Found\r\nContent-Type: text/html; charset=UTF-8\r\nConnection: close\r\n\r\n"
+      connectionSocket.send(notfound)
       #Fill in end
       #Close client socket
       #Fill in start
